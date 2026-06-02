@@ -2,3 +2,12 @@ __pycache__/
 *.pyc
 *.pyo
 .ipynb_checkpoints/
+venv/
+.DS_Store
+Data/_unused/
+
+# Large spectrum image datasets — hosted on Zenodo
+Data/vEEL_Spectrum_Images/EmptyCNT_Cryo_SI.npy
+Data/vEEL_Spectrum_Images/FilledCNT_1pt4nm_Cryo_2DSI_SI.npy
+Data/vEEL_Spectrum_Images/FilledCNT_2pt3nm_Cryo_SI.npy
+Data/vEEL_Spectrum_Images/FilledCNT_pt8nm_Cryo_SISeq_SI.npy
