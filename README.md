@@ -31,8 +31,7 @@ numpy
 scipy
 matplotlib
 Pillow
-pandas
-jupyter
+jupyterlab
 ```
 
 Install with:
@@ -44,7 +43,7 @@ pip install -r requirements.txt
 or with conda:
 
 ```bash
-conda install numpy scipy matplotlib pillow pandas jupyter
+conda install numpy scipy matplotlib pillow jupyterlab
 ```
 
 ### Running the notebooks
@@ -72,24 +71,24 @@ HydrogenBonding_MainTextFigures/
 │   └── CNT_Analysis_Functions.py   # Shared analysis function library
 ├── Data/
 │   ├── vEEL_Point_Spectra/         # Preprocessed vibrational EELS point spectra
-│   ├── vEEL_Spectrum_Images/       # Vibrational EELS spectrum image datasets
+│   ├── vEEL_Spectrum_Images/       # Spectrum image datasets (see note below)
 │   ├── Images/                     # TEM and STEM reference images
-│   ├── Schematics/                 # Schematic diagrams (PNG)
-│   ├── DFT_vDOS/                   # DFT vibrational density of states (CSV)
-│   ├── DFT_Snapshots/              # MD simulation snapshots (TIFF)
-│   └── DFT_Heatmaps/               # MD statistical heatmaps (CSV and PNG)
-│       └── Preprocessed/
+│   └── Schematics/                 # Schematic diagrams
 ├── requirements.txt
 └── README.md
 ```
+
+> **Data hosting:** Small files (< 1 MB) are stored directly in this repository. Large spectrum image datasets (39–150 MB each) are hosted on Zenodo and are downloaded automatically the first time the relevant notebook is run. All datasets are also available for direct download at https://doi.org/10.5281/zenodo.20534179.
 
 ---
 
 ## Data Files
 
+The table below uses **GitHub** and **Zenodo** to indicate where each file is stored. GitHub files are present immediately after cloning. Zenodo files are downloaded automatically on the first notebook run.
+
 ### vEEL Point Spectra (`Data/vEEL_Point_Spectra/`)
 
-Preprocessed vibrational EELS point spectra with calibrated energy axes. Each sample has a paired `_E.npy` (energy axis in eV) and `_S.npy` (signal) file.
+Preprocessed vibrational EELS point spectra with calibrated energy axes. Each dataset has a paired `_E.npy` (energy axis in eV) and `_S.npy` (signal intensity) file. All files are in **GitHub**.
 
 | File prefix | Description |
 |---|---|
@@ -102,66 +101,40 @@ Preprocessed vibrational EELS point spectra with calibrated energy axes. Each sa
 
 ### vEEL Spectrum Images (`Data/vEEL_Spectrum_Images/`)
 
-Nion Swift format `.npy` + `.json` pairs (3D EELS spectrum images and HAADF images) plus preprocessed 2D arrays for the 1.4 nm CNT datasets.
+Hyperspectral EELS datasets. Nion Swift `.npy` + `.json` pairs store 3D spectrum images with spatial and spectral calibration metadata. Preprocessed 1D energy-axis files (`_E.npy`) are provided separately for datasets that are not in Nion Swift format.
 
-| File | Format | Description |
+| File | Location | Description |
 |---|---|---|
-| `EmptyCNT_Cryo_SI` | `.npy` + `.json` | Empty CNT 3D EELS spectrum image, cryogenic |
-| `EmptyCNT_Cryo_SI_Z` | `.npy` + `.json` | Simultaneously acquired HAADF image |
-| `FilledCNT_2pt3nm_Cryo_SI` | `.npy` + `.json` | 2.3 nm filled CNT 3D EELS spectrum image, cryogenic |
-| `FilledCNT_2pt3nm_Cryo_SI_Z` | `.npy` + `.json` | Simultaneously acquired HAADF image |
-| `FilledCNT_1pt4nm_Cryo_2DSI_E` | `.npy` | 1.4 nm filled CNT cryo 2D-SI energy axis (eV) |
-| `FilledCNT_1pt4nm_Cryo_2DSI_SI` | `.npy` | 1.4 nm filled CNT cryo 2D-SI spectrum image |
-| `FilledCNT_pt8nm_Cryo_SISeq_E` | `.npy` | 0.8 nm filled CNT cryo SI sequence energy axis (eV) |
-| `FilledCNT_pt8nm_Cryo_SISeq_SI` | `.npy` | 0.8 nm filled CNT cryo SI sequence |
-| `FilledCNT_pt8nm_Cryo_SISeq_MAADF` | `.npy` | Simultaneously acquired MAADF image |
+| `EmptyCNT_Cryo_SI.json` | GitHub | Nion Swift metadata for empty CNT cryo SI |
+| `EmptyCNT_Cryo_SI.npy` | **Zenodo** (39 MB) | Empty CNT 3D EELS spectrum image, cryogenic |
+| `EmptyCNT_Cryo_SI_Z.npy/.json` | GitHub | Simultaneously acquired HAADF image |
+| `FilledCNT_2pt3nm_Cryo_SI.json` | GitHub | Nion Swift metadata for 2.3 nm CNT cryo SI |
+| `FilledCNT_2pt3nm_Cryo_SI.npy` | **Zenodo** (49 MB) | 2.3 nm filled CNT 3D EELS spectrum image, cryogenic |
+| `FilledCNT_2pt3nm_Cryo_SI_E.npy` | GitHub | 2.3 nm CNT cryo SI energy axis (eV) |
+| `FilledCNT_2pt3nm_Cryo_SI_Z.npy/.json` | GitHub | Simultaneously acquired HAADF image |
+| `FilledCNT_1pt4nm_Cryo_2DSI_E.npy` | GitHub | 1.4 nm CNT cryo 2D-SI energy axis (eV) |
+| `FilledCNT_1pt4nm_Cryo_2DSI_SI.npy` | **Zenodo** (150 MB) | 1.4 nm filled CNT cryo 2D spectrum image |
+| `FilledCNT_pt8nm_Cryo_SISeq_E.npy` | GitHub | 0.8 nm CNT cryo SI sequence energy axis (eV) |
+| `FilledCNT_pt8nm_Cryo_SISeq_MAADF.npy` | GitHub | 0.8 nm CNT cryo simultaneously acquired MAADF image |
+| `FilledCNT_pt8nm_Cryo_SISeq_SI.npy` | **Zenodo** (57 MB) | 0.8 nm filled CNT cryo spectrum image sequence |
 
 ### Images (`Data/Images/`)
 
-TEM and STEM reference images. `.npy`/`.json` pairs use Nion Swift format; one file is provided as `.png`.
+TEM and STEM reference images in Nion Swift format (`.npy` + `.json`) or `.png`. All files are in **GitHub**.
 
 | File | Description |
 |---|---|
-| `CNT1_TEM.npy/.json` | TEM image of CNT 1 |
-| `CNT2_TEM.npy/.json` | TEM image of CNT 2 |
-| `SmallFOV_STEM.npy/.json` | Small field-of-view STEM image |
+| `SmallFOV_STEM.npy/.json` | Small field-of-view HAADF STEM image |
 | `LargeFOV_TEM.png` | Large field-of-view TEM image |
 
 ### Schematics (`Data/Schematics/`)
 
+All files are in **GitHub**.
+
 | File | Description |
 |---|---|
-| `EELS_Schematic.png` | Schematic of the EELS experiment |
-| `Molecular_Schematic.png` | Schematic of molecular hydrogen bonding |
+| `EELS_Schematic.png` | Schematic of the vibrational EELS experiment (Figure 1) |
 | `H2OCNTschematic.tiff` | Water-in-CNT hydrogen bonding schematic (Figure 2) |
-
-### DFT vDOS (`Data/DFT_vDOS/`)
-
-Vibrational density of states from molecular dynamics simulations. CSV files with three columns: Frequency (eV), Frequency (meV), vDOS.
-
-| File | Description |
-|---|---|
-| `bulk_300K_1pt0_vDOS.csv` | Bulk water, 300 K, 1.0 g/cc |
-| `MixedPhaseIce_vDOS.csv` | Mixed-phase ice |
-| `rCNT_300K_0pt5_vDOS.csv` | Rigid CNT, 300 K, 0.5 g/cc |
-| `vCNT_AllT_0pt5_vDOS.csv` | Vibrating CNT, all temperatures, 0.5 g/cc |
-| `vCNT_AllT_pt75_vDOS.csv` | Vibrating CNT, all temperatures, 0.75 g/cc |
-| `vCNT_AllT_1pt0_vDOS.csv` | Vibrating CNT, all temperatures, 1.0 g/cc |
-
-### DFT Snapshots (`Data/DFT_Snapshots/`)
-
-Single-frame MD simulation snapshots exported from VESTA as TIFF files.
-
-| File | Description |
-|---|---|
-| `bulk_300K_1pt0_snapshot.tif` | Bulk water, 300 K, 1.0 g/cc |
-| `MixedPhaseIce_snapshot.tif` | Mixed-phase ice |
-| `rCNT_300K_0pt5_snapshot.tif` | Rigid CNT, 300 K, 0.5 g/cc |
-| `vCNT_300K_0pt5_snapshot.tif` | Vibrating CNT, 300 K, 0.5 g/cc |
-
-### DFT Heatmaps (`Data/DFT_Heatmaps/`)
-
-Statistical heatmaps of molecular configurations throughout MD runs. Raw CSV files have four columns: O-O distance (dOO), bond angle (theta), O-H distance (dOH), intermolecular H-O distance (dHO). Preprocessed PNG files were generated in Origin.
 
 ---
 
