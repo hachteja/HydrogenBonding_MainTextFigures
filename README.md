@@ -1,16 +1,22 @@
 # Main Text Figures — Hydrogen Bonding in Water under Extreme Confinement
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20534179.svg)](https://doi.org/10.5281/zenodo.20534179)
+
 **Contact:** Jordan A. Hachtel (hachtelja@ornl.gov)
 
 **Manuscript:** *Hydrogen bonding in water under extreme confinement*
 - arXiv preprint: https://arxiv.org/abs/2402.17989
 - Published manuscript link: *(to be updated upon publication)*
 
+**Data:** All datasets are archived on Zenodo: https://doi.org/10.5281/zenodo.20534179
+
 ---
 
 ## Overview
 
 This repository contains the Python notebooks, data, and analysis code needed to reproduce Figures 1, 2, and 3 of the main text. Each notebook is self-contained and produces a publication-quality figure as output.
+
+Large spectrum image datasets (>39 MB) are hosted on Zenodo and are downloaded automatically the first time each notebook is run.
 
 ---
 
